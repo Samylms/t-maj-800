@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
- import AppBar from '@material-ui/core/AppBar';
+import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -11,17 +11,19 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './Sidebar/listItems';
+import { mainListItems } from './Sidebar/listItems';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import {
   SensorWind,
    SensorHumidity,
    SensorSunshine,
-   Chart
+   RainAmount,
+   Map
 } from './components/';
  
 
@@ -115,8 +117,7 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+ 
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -156,8 +157,7 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
+       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -194,18 +194,38 @@ export default function Dashboard() {
          <SensorSunshine /> 
         </Grid>
 
+      <Fab variant="extended" color="primary">
+        <AddIcon className={classes.extendedIcon} />
+        Ajouter un champ
+      </Fab>
         </Grid> 
-        <br></br>
-
-        {/* Chart */}
-           <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
 
         
- 
+
+        <br></br>
+
+        {/* Map */}
+        <Grid
+          item
+          lg={8}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+         <Map /> 
+        </Grid>
+        <br></br>      <br></br>
+        {/* RainAmount */}
+        <Grid
+          item
+          lg={6}
+          sm={8}
+          xl={8}
+          xs={8}
+        >
+         <RainAmount /> 
+        </Grid>
+         
        </Container>
       </main>
     </div>
