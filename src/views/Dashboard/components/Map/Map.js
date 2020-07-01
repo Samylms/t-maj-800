@@ -7,6 +7,7 @@ import {getFeatureStyle, getEditHandleStyle} from './style';
 import {
   Card,
    CardContent,
+   CardHeader
  } from '@material-ui/core';
 import './Map.css';
  
@@ -28,6 +29,7 @@ import './Map.css';
       
   _updateViewport = viewport => {
     this.setState({viewport});
+    console.log(viewport);
   };
 
   _onSelect = options => {
@@ -82,7 +84,9 @@ import './Map.css';
         const {viewport, mode} = this.state;
           return(
             <Card  >
-          
+          <CardHeader
+        title="Ajouter un champ d'agriculture sur la carte"
+      />
             <CardContent>
               <div id="map" className="mapContainer">
                    <ReactMapGL {...viewport} 
@@ -102,7 +106,7 @@ import './Map.css';
                     editHandleStyle={getEditHandleStyle}
                     />
                      {this._renderDrawTools()}
-        {this._renderControlPanel()}
+                     {this._renderControlPanel()}
                    </ReactMapGL>
               </div>
                
