@@ -8,15 +8,29 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Dashboard from '@material-ui/icons/Dashboard';
 import HorizontalSplit from '@material-ui/icons/HorizontalSplit';
 import Person from '@material-ui/icons/Person';
-
  
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+ 
+const useStyles = makeStyles(theme => ({
+  drawer: {
+    width: 240,
+    [theme.breakpoints.up('lg')]: {
+      marginTop: 64,
+      height: 'calc(100% - 64px)'
+    }
   },
+  root: {
+    backgroundColor: theme.palette.white,
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    padding: theme.spacing(2)
+  },
+  divider: {
+    margin: theme.spacing(2, 0)
+  },
+  nav: {
+    marginBottom: theme.spacing(2)
+  }
 }));
  
 export default function SimpleList() {
@@ -24,8 +38,9 @@ export default function SimpleList() {
 
   return (
     <div className={classes.root}>
-      <List  >   
-        
+      
+   
+      <List  >  
       <ListItem 
         button  
         key="Dashboard"
