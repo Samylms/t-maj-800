@@ -334,7 +334,7 @@ const SignIn = props => {
               </form>
             </div>
           </div>
-        </Grid>
+        </Grid> 
       </Grid>
     </div>
   );

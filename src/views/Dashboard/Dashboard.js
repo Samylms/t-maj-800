@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
   SensorWind,
   SensorHumidity,
   SensorSunshine,
-//RainAmount,
+  RainAmount,
   Report,
   Map
 } from './components/';
@@ -73,7 +73,7 @@ const Dashboard = () => {
         >
          <Map /> 
         </Grid>
-        
+
         {/* Report */}
         <Grid
           item
@@ -89,7 +89,15 @@ const Dashboard = () => {
      
         <br></br>      <br></br>
         {/* RainAmount  <RainAmount />*/}
-         
+        <Grid
+          item
+          lg={7}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <RainAmount />
+        </Grid> 
          
        </Container>
       </main>
