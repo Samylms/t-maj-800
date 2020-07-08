@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import ReactMapGL  from 'react-map-gl';
+import ReactMapGL from 'react-map-gl';
 import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+import ControlPanel from './control-panel.js';
 import {getFeatureStyle, getEditHandleStyle} from './style';
 import {
   Card,
@@ -9,8 +10,7 @@ import {
    CardHeader
  } from '@material-ui/core';
 import './Map.css';
-  
-
+ 
  
   class Map extends Component{
  
@@ -25,7 +25,6 @@ import './Map.css';
         
       };
  
-
       
   _updateViewport = viewport => {
     this.setState({viewport});
@@ -68,14 +67,44 @@ import './Map.css';
               />
             </div>
           </div>
-        ); 
- };
+        );
+      };
+    
+      _renderControlPanel = () => {
+        const features = this._editorRef && this._editorRef.getFeatures();
+        let featureIndex = this.state.selectedFeatureIndex;
+        if (features && featureIndex === null) {
+          featureIndex = features.length - 1;
+        }
+        const polygon = features && features.length ? features[featureIndex] : null;
+        console.log(polygon);
       
-      render(){
+        if (polygon != null){
+          
+          axios({
+            method: 'post',
+            url: 'http://localhost:8000/polygon',
+            data: polygon,
+            headers: {'Content-Type': 'application/json' }
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+      }
+        return <ControlPanel containerComponent={this.props.containerComponent} polygon={polygon} />;
 
+      };
+
+      
+ 
+      render(){
         const {viewport, mode} = this.state;
-        
-          return(
+           return(
             <Card  >
           <CardHeader
         title="Ajouter un champ d'agriculture sur la carte"
@@ -96,10 +125,10 @@ import './Map.css';
                     onUpdate={this._onUpdate}
                     editHandleShape={'circle'}
                     featureStyle={getFeatureStyle}
-                    editHandleStyle={getEditHandleStyle} />
-            
-                       {this._renderDrawTools()}
-                     
+                    editHandleStyle={getEditHandleStyle}
+                    />
+                     {this._renderDrawTools()}
+                     {this._renderControlPanel()}
                    </ReactMapGL>
               </div>
                
@@ -108,8 +137,6 @@ import './Map.css';
           )
       }
   }
-  Map.propTypes = {
-    className: PropTypes.string
-  };
+  
 
 export default Map;
