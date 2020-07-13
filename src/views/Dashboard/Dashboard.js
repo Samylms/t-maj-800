@@ -15,8 +15,14 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
-  }
+    padding: theme.spacing(4),
+	marginTop: 20,
+	marginLeft: 50,
+	zIndex: theme.zIndex.drawer + 1,
+	overflow: 'scroll',  
+	height:'100vh',
+	
+  },
 }));
 
 const Dashboard = () => {
