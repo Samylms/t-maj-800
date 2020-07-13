@@ -65,7 +65,7 @@ const Farm = () => {
     timer.current = setTimeout(() => {
         axios({
             method: 'get',
-            url: 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/',
+            url: 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/report',
             headers: {
                 'Content-Type': 'application/json'
             },
