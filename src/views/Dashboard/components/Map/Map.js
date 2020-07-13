@@ -10,10 +10,11 @@ import {
    CardHeader
  } from '@material-ui/core';
 import './Map.css';
- 
+
+  
  
   class Map extends Component{
- 
+    
     state = {
         viewport: {
           width: "50vw",
@@ -24,8 +25,11 @@ import './Map.css';
         }
         
       };
- 
-      
+
+     
+
+        
+
   _updateViewport = viewport => {
     this.setState({viewport});
   };
@@ -77,7 +81,6 @@ import './Map.css';
           featureIndex = features.length - 1;
         }
         const polygon = features && features.length ? features[featureIndex] : null;
-        console.log(polygon);
       
         if (polygon != null){
           
@@ -129,7 +132,7 @@ import './Map.css';
                     />
                      {this._renderDrawTools()}
                      {this._renderControlPanel()}
-                   </ReactMapGL>
+                    </ReactMapGL>
               </div>
                
             </CardContent>          

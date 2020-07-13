@@ -1,12 +1,108 @@
 import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(10, 75)
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+  
+}));
  
+
 const Farm = () => {
-    return (
-       <div>
-          <h1>Farm</h1>
-           <p>Farm page body content</p>
-       </div>
-    );
+  const classes = useStyles();
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const timer = React.useRef();
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: success,
+  });
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    timer.current = setTimeout(() => {
+        axios({
+            method: 'get',
+            url: 'http://127.0.0.1:5000/',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            crossdomain: true
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+                setSuccess(true);
+                setLoading(false);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+    }, 2000); 
+    
+    }
+  };
+
+  return (
+    <div className={classes.root}>
+      
+      <div className={classes.wrapper}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={buttonClassname}
+          disabled={loading}
+          onClick={handleButtonClick}
+        >
+          Start prediction
+        </Button>
+        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+      </div>
+    </div>
+  );
 }
+
  
 export default Farm;
