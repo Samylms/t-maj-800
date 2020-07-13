@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {  useState }  from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -46,16 +46,17 @@ const Farm = () => {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
-
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
   });
-
+  const [post, setPostArray] = useState([])
+  
   React.useEffect(() => {
     return () => {
       clearTimeout(timer.current);
     };
   }, []);
+
 
   const handleButtonClick = () => {
     if (!loading) {
@@ -75,7 +76,12 @@ const Farm = () => {
                 console.log(response);
                 setSuccess(true);
                 setLoading(false);
+                setPostArray([response.data]);
+
             })
+            
+            
+           
             .catch(function (response) {
                 //handle error
                 console.log(response);
@@ -84,6 +90,8 @@ const Farm = () => {
     
     }
   };
+
+ 
 
   return (
     <div className={classes.root}>
@@ -99,6 +107,18 @@ const Farm = () => {
           Start prediction
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+    
+
+    <div   >
+      {
+        post.map(item => <div>
+            {item.Fog} 
+            {item.None}
+            {item.Rain}
+            {item.Snow}
+            {item.Thunderstorm}</div>)
+      }
+    </div>
       </div>
     </div>
   );

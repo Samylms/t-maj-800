@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
+ import { makeStyles } from '@material-ui/styles';
 import {
   Grid,
   Button,
@@ -15,37 +14,7 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
-  },
-  policy: {
-    presence: { allowEmpty: false, message: 'is required' },
-    checked: true
-  }
-};
+ 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -153,7 +122,7 @@ const SignUp = props => {
   });
 
   useEffect(() => {
-    const errors = validate(formState.values, schema);
+    const errors = "erreur synthaxer";
 
     setFormState(formState => ({
       ...formState,
