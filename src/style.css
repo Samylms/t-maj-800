@@ -1,0 +1,5 @@
+.MuiDrawer-docked {
+    flex: 0 0 auto;
+    position: absolute;
+    height: 100%;
+}
