@@ -109,16 +109,7 @@ const Farm = () => {
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
     
 
-    <div   >
-      {
-        post.map(item => <div>
-            {item.Fog} 
-            {item.None}
-            {item.Rain}
-            {item.Snow}
-            {item.Thunderstorm}</div>)
-      }
-    </div>
+    
       </div>
     </div>
   );
