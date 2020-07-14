@@ -29,19 +29,13 @@ export default class ChatResponse extends Component {
     function readyStateChange() {
       if (this.readyState === 4) {
         const data = this.responseText;
-        self.setState({ loading: false, message: data });
-		this.triggerNext();
+        self.setState({ loading: false, message: data, trigger: true });
+		this.props.triggerNextStep();
       }
     }
 
     xhr.open('GET', queryUrl);
     xhr.send();
-  }
-
-  triggerNext() {
-    this.setState({ trigger: true }, () => {
-      this.props.triggerNextStep();
-    });
   }
 
   render() {
