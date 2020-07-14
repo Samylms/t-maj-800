@@ -12,7 +12,7 @@ export default class ChatResponse extends Component {
       trigger: false,
     };
 
-    this.triggetNext = this.triggetNext.bind(this);
+    this.triggerNext = this.triggerNext.bind(this);
   }
 
   componentWillMount() {
@@ -30,7 +30,7 @@ export default class ChatResponse extends Component {
       if (this.readyState === 4) {
         const data = this.responseText;
         self.setState({ loading: false, message: data });
-		triggerNext();
+		this.triggerNext();
       }
     }
 
