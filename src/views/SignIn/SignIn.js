@@ -289,10 +289,6 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
 }
 
-	function getCookie(name) {
-    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-    return v ? v[2] : null;
-}
 
 async function Sign_in() {
     var email = document.getElementsByName("email")[0]; 

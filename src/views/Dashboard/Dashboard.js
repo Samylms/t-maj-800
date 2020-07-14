@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
- 
+
   return (
     <div className={classes.root}>
       <main className={classes.content}>
