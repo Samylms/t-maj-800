@@ -26,7 +26,7 @@ const CustomerService = () => {
     return (
        <div style={{display: 'flex', justifyContent: 'center', marginTop: '7%'}}>
          
-          <ChatBot headerTitle='Customer service chat' placeholder='Type your request here...' steps={steps} />
+          <ChatBot headerTitle='Customer service chat' placeholder='Type your request here...' steps={steps} width='500px' />
        </div>
     );
 }
