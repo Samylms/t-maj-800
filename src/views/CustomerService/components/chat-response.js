@@ -49,19 +49,6 @@ export default class ChatResponse extends Component {
     return (
       <div className="ChatResponse">
         { loading ? <Loading /> : message }
-        {
-          !loading &&
-          <div
-            style={{
-              textAlign: 'center',
-              marginTop: 20,
-            }}
-          >
-            {
-              !trigger &&
-            }
-          </div>
-        }
       </div>
     );
   }

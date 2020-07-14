@@ -18,14 +18,15 @@ const CustomerService = () => {
         id: '3',
         component: <ChatResponse />,
         waitAction: true,
-        trigger: '1',
+        asMessage: true,
+        trigger: 'ask',
       },
     ];
 
     return (
        <div style={{display: 'flex', justifyContent: 'center', marginTop: '7%'}}>
          
-          <ChatBot steps={steps} />
+          <ChatBot headerTitle='Customer service chat' placeholder='Type your request here...' steps={steps} />
        </div>
     );
 }
