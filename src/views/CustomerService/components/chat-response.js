@@ -8,7 +8,7 @@ export default class ChatResponse extends Component {
 
     this.state = {
       loading: true,
-      result: '',
+      message: '',
       trigger: false,
     };
 
@@ -18,9 +18,9 @@ export default class ChatResponse extends Component {
   componentWillMount() {
     const self = this;
     const { steps } = this.props;
-    const message = encodeURI(steps.ask.value);
+    const question = encodeURI(steps.ask.value);
 
-    const queryUrl = 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/?message=' + message;
+    const queryUrl = 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/chat?message=' + question;
 
     const xhr = new XMLHttpRequest();
 
@@ -29,7 +29,7 @@ export default class ChatResponse extends Component {
     function readyStateChange() {
       if (this.readyState === 4) {
         const data = this.responseText;
-        self.setState({ loading: false, result: data });
+        self.setState({ loading: false, message: data });
       }
     }
 
@@ -44,11 +44,11 @@ export default class ChatResponse extends Component {
   }
 
   render() {
-    const { trigger, loading, result } = this.state;
+    const { trigger, loading, message } = this.state;
 
     return (
       <div className="ChatResponse">
-        { loading ? <Loading /> : result }
+        { loading ? <Loading /> : message }
         {
           !loading &&
           <div
@@ -59,11 +59,6 @@ export default class ChatResponse extends Component {
           >
             {
               !trigger &&
-              <button
-                onClick={() => this.triggetNext()}
-              >
-                Ask more
-              </button>
             }
           </div>
         }
