@@ -11,8 +11,6 @@ export default class ChatResponse extends Component {
       message: '',
       trigger: false,
     };
-
-    this.triggerNext = this.triggerNext.bind(this);
   }
 
   componentWillMount() {
