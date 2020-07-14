@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
  import { makeStyles } from '@material-ui/styles';
+ import {instance} from '../../api';
 import {
   Grid,
   Button,
@@ -167,37 +168,15 @@ const SignUp = props => {
       <Grid
         className={classes.grid}
         container
+		item
+          lg={5}
       >
         <Grid
           className={classes.quoteContainer}
           item
           lg={5}
         >
-          <div className={classes.quote}>
-            <div className={classes.quoteInner}>
-              <Typography
-                className={classes.quoteText}
-                variant="h1"
-              >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
-              </Typography>
-              <div className={classes.person}>
-                <Typography
-                  className={classes.name}
-                  variant="body1"
-                >
-                  Takamaru Ayako
-                </Typography>
-                <Typography
-                  className={classes.bio}
-                  variant="body2"
-                >
-                  Manager at inVision
-                </Typography>
-              </div>
-            </div>
-          </div>
+
         </Grid>
         <Grid
           className={classes.content}
@@ -270,6 +249,20 @@ const SignUp = props => {
                   value={formState.values.email || ''}
                   variant="outlined"
                 />
+				<TextField
+                  className={classes.textField}
+                  error={hasError('username')}
+                  fullWidth
+                  helperText={
+                    hasError('username') ? formState.errors.username[0] : null
+                  }
+                  label="Username"
+                  name="username"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.username || ''}
+                  variant="outlined"
+                />
                 <TextField
                   className={classes.textField}
                   error={hasError('password')}
@@ -317,11 +310,12 @@ const SignUp = props => {
                 <Button
                   className={classes.signUpButton}
                   color="primary"
-                  disabled={!formState.isValid}
+                  disabled={formState.isValid}
                   fullWidth
                   size="large"
-                  type="submit"
+                  
                   variant="contained"
+				  onClick={Sign_up}
                 >
                   Sign up now
                 </Button>
@@ -332,7 +326,7 @@ const SignUp = props => {
                   Have an account?{' '}
                   <Link
                     component={RouterLink}
-                    to="/sign-in"
+                    to="/signin"
                     variant="h6"
                   >
                     Sign in
@@ -346,6 +340,70 @@ const SignUp = props => {
     </div>
   );
 };
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function is_null_or_empty(elem)
+{
+	if( elem == null || typeof elem === 'undefined' || elem.value == '')
+	{
+		return true;
+	}
+	else
+	return false;
+}
+async function Sign_up() {
+    var firstName = document.getElementsByName("firstName")[0]; 
+    var lastname = document.getElementsByName("lastName")[0]; 
+    var email = document.getElementsByName("email")[0]; 
+    var _password = document.getElementsByName("password")[0]; 
+    var policy = document.getElementsByName("policy")[0]; 
+	var username = document.getElementsByName("username")[0]; 
+	if(!policy.checked)
+	{
+		alert("Veuillez accepter les conditions générales!");
+		return;
+	}
+    else if (is_null_or_empty(firstName) || is_null_or_empty(lastname) || is_null_or_empty(email) || is_null_or_empty(_password) )
+    {
+	  alert("un ou plusieurs champs sont vides");
+	  return;
+    }
+	else
+	{
+		if(!validateEmail(email.value))
+		{
+			alert("format du mail incorrect !");
+			return;
+		}
+	firstName = firstName.value;; 
+	lastname = lastname.value; 
+	email = email.value; 
+	_password = _password.value; 
+	policy = policy.value; 
+	username= username.value;
+	await instance.post(instance.defaults.baseURL + '/users/signup', {
+		pseudo:username,
+        email:email,
+        firstname:firstName,
+        lastname:lastname,
+		password:_password
+	})
+    .then(function (response) {
+		alert(response.data.token);
+		window.location.href = "/";
+	})
+	.catch(function (error) {
+		alert(error.response.data.msg);
+	});
+   
+    return ;
+	
+	}
+}
+
 
 SignUp.propTypes = {
   history: PropTypes.object
