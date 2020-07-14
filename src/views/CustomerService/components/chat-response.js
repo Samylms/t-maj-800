@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ChatBot, { Loading } from 'react-simple-chatbot';
+import { Loading } from 'react-simple-chatbot';
 
 export default class ChatResponse extends Component {
   constructor(props) {
@@ -18,8 +18,7 @@ export default class ChatResponse extends Component {
   componentWillMount() {
     const self = this;
     const { steps } = this.props;
-    const message = steps.message.value;
-    const query = encodeURI(message);
+    const message = encodeURI(steps.ask.value);
 
     const queryUrl = 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/?message=' + message;
 
