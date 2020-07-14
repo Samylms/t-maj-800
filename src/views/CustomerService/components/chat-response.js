@@ -30,6 +30,7 @@ export default class ChatResponse extends Component {
       if (this.readyState === 4) {
         const data = this.responseText;
         self.setState({ loading: false, message: data });
+		triggerNext();
       }
     }
 
@@ -37,7 +38,7 @@ export default class ChatResponse extends Component {
     xhr.send();
   }
 
-  triggetNext() {
+  triggerNext() {
     this.setState({ trigger: true }, () => {
       this.props.triggerNextStep();
     });
