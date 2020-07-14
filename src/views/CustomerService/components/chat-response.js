@@ -15,7 +15,7 @@ export default class ChatResponse extends Component {
 
   componentWillMount() {
     const self = this;
-    const { steps } = this.props;
+    const { steps, triggerNextStep } = this.props;
     const question = encodeURI(steps.ask.value);
 
     const queryUrl = 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/chat?message=' + question;
@@ -28,7 +28,7 @@ export default class ChatResponse extends Component {
       if (this.readyState === 4) {
         const data = this.responseText;
         self.setState({ loading: false, message: data, trigger: true });
-		this.props.triggerNextStep();
+        triggerNextStep();
       }
     }
 
