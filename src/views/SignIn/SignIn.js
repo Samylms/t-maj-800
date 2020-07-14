@@ -320,8 +320,7 @@ async function Sign_in() {
 		})
 		.then(function (response) {
 			setCookie("bearer",response.data.token, 1);
-			alert(getCookie("bearer"));
-			//window.location.href = window.location.href = "/";
+			window.location.href = window.location.href = "/";
 		})
 		.catch(function (error) {
 			alert(error.response.data.msg);

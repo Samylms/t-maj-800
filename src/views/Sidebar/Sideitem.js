@@ -1,4 +1,3 @@
-import React  from 'react';
 import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -8,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Dashboard from '@material-ui/icons/Dashboard';
 import HorizontalSplit from '@material-ui/icons/HorizontalSplit';
 import Person from '@material-ui/icons/Person';
- 
+ import React, { Component } from 'react'
  
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -33,11 +32,55 @@ const useStyles = makeStyles(theme => ({
   }
 }));
  
-export default function SimpleList() {
-  const classes = useStyles();
 
+ 
+ 
+ 
+ function setCookie(name, value, days) {
+    var d = new Date;
+    d.setTime(d.getTime() + 24*60*60*1000*days);
+    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+}
+ function deleteCookie(name) { 
+	setCookie(name, '', -1); 
+ }
+
+ 
+ function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
+
+export default class SimpleList extends Component {
+  //const classes = useStyles();
+//const [elemName, setText] = React.useState("");
+//const [signin, setSignin] = React.useState("");
+
+ constructor(props) {
+    super(props)
+	this.state = {name: "Signin", signin: "/signin"};
+  }
+
+  componentDidMount() {
+  	 var elem = getCookie("bearer");
+	 if(elem != null)
+	 {
+		 this.setState({name :"Log out", signin:"/logout"});
+		 deleteCookie("bearer");
+		 this.setState();
+		 
+		 
+		return;
+	 }
+	 else{
+		this.setState({name :"log In", signin:"/signin"});
+		
+		return ;
+	 }
+}
+  render(){
   return (
-    <div className={classes.root}>
+    <div class="root">
       
    
       <List  >  
@@ -63,6 +106,7 @@ export default function SimpleList() {
 
         <ListItem 
         button  
+		
         key="CustomerService"
         component={NavLink} to="/CustomerService">
           <ListItemIcon>
@@ -70,8 +114,18 @@ export default function SimpleList() {
           </ListItemIcon>
           <ListItemText primary="Customer Service" />
         </ListItem>
+		
+		 <ListItem name="signin_signout"
+        button  
+        key="Signin"
+        component={NavLink} to={this.state.signin}>
+          <ListItemIcon>
+            <Person />
+          </ListItemIcon>
+          <ListItemText name="signin_name" primary={this.state.name} />
+        </ListItem>
       </List>
      
     </div>
-  );
+	)};
 }

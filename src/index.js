@@ -9,6 +9,7 @@ import Farm from './views/Farming/Farm';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import Appbar from './views/Sidebar/Appbar';
+import Logout from './views/Logout/Logout';
 import theme from './theme';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -25,6 +26,7 @@ ReactDOM.render(
               <Route path="/Farm" component={Farm} />
               <Route path="/SignIn" component={SignIn} />
               <Route path="/SignUp" component={SignUp} />
+			  <Route path="/logout" component={Logout} />
 
             </Switch>
             </ThemeProvider>
