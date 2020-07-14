@@ -347,7 +347,7 @@ function validateEmail(email) {
 
 function is_null_or_empty(elem)
 {
-	if( elem == null || typeof elem === 'undefined' || elem.value == '')
+	if( elem == null || typeof elem === 'undefined' || elem.value === '')
 	{
 		return true;
 	}

@@ -52,9 +52,6 @@ const useStyles = makeStyles(theme => ({
 }
 
 export default class SimpleList extends Component {
-  //const classes = useStyles();
-//const [elemName, setText] = React.useState("");
-//const [signin, setSignin] = React.useState("");
 
  constructor(props) {
     super(props)

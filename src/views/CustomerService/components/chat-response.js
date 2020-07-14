@@ -37,7 +37,7 @@ export default class ChatResponse extends Component {
   }
 
   render() {
-    const { trigger, loading, message } = this.state;
+    const {  loading, message } = this.state;
 
     return (
       <div className="ChatResponse">

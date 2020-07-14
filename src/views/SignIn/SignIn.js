@@ -3,7 +3,6 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
  import {instance} from '../../api';
- import api from '../../api';
 import {
   Grid,
   Button,
@@ -276,7 +275,7 @@ function validateEmail(email) {
 
 function is_null_or_empty(elem)
 {
-	if( elem == null || typeof elem === 'undefined' || elem.value == '')
+	if( elem == null || typeof elem === 'undefined' || elem.value === '')
 	{
 		return true;
 	}
