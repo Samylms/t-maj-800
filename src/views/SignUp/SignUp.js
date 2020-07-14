@@ -392,7 +392,6 @@ async function Sign_up() {
 		password:_password
 	})
     .then(function (response) {
-		alert(response.data.token);
 		window.location.href = "/";
 	})
 	.catch(function (error) {
