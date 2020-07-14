@@ -64,11 +64,11 @@ export default function SimpleList() {
         <ListItem 
         button  
         key="CustomerService"
-        component={NavLink} to="/CostumerService">
+        component={NavLink} to="/CustomerService">
           <ListItemIcon>
             <Person />
           </ListItemIcon>
-          <ListItemText primary="Costumer Service" />
+          <ListItemText primary="Customer Service" />
         </ListItem>
       </List>
      

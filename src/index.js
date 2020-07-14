@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Dashboard from './views/Dashboard/Dashboard';
-import CostumerService from './views/CostumerService/CostumerService';
+import CustomerService from './views/CustomerService/CustomerService';
 import Farm from './views/Farming/Farm';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
@@ -21,7 +21,7 @@ ReactDOM.render(
   <Appbar/>
              <Switch>
               <Route exact path="/" component={Dashboard} />
-              <Route path="/CostumerService" component={CostumerService} />
+              <Route path="/CustomerService" component={CustomerService} />
               <Route path="/Farm" component={Farm} />
               <Route path="/SignIn" component={SignIn} />
               <Route path="/SignUp" component={SignUp} />

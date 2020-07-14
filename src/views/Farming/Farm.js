@@ -65,7 +65,7 @@ const Farm = () => {
     timer.current = setTimeout(() => {
         axios({
             method: 'get',
-            url: 'http://127.0.0.1:5000/',
+            url: 'http://' + (process.env.AI_HOST || 'localhost') + ':' + (process.env.AI_PORT || '5000') + '/report',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -76,12 +76,9 @@ const Farm = () => {
                 console.log(response);
                 setSuccess(true);
                 setLoading(false);
-                setPostArray([response.data]);
+                setPostArray([JSON.stringify(response.data)]);
 
             })
-            
-            
-           
             .catch(function (response) {
                 //handle error
                 console.log(response);
@@ -90,8 +87,6 @@ const Farm = () => {
     
     }
   };
-
- 
 
   return (
     <div className={classes.root}>
@@ -108,8 +103,19 @@ const Farm = () => {
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
     
+        
 
-    
+      <div>
+            {
+            post.map(function(object, i)
+            {
+               return <div  key={i}> 
+                          { 
+                          object
+                         }
+                      </div>; 
+             })}
+        </div>     
       </div>
     </div>
   );
